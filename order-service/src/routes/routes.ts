@@ -62,7 +62,13 @@ export function RegisterRoutes(app: Router) {
 		return "getHeaders" in object && "getStatus" in object && "setStatus" in object;
 	}
 
-	function promiseHandler(controllerObj: any, promise: any, response: any, successStatus: any, next: any) {
+	function promiseHandler(
+		controllerObj: any,
+		promise: any,
+		response: any,
+		successStatus: any,
+		next: any
+	) {
 		return Promise.resolve(promise)
 			.then((data: any) => {
 				let statusCode = successStatus;
@@ -81,14 +87,24 @@ export function RegisterRoutes(app: Router) {
 
 	// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
-	function returnHandler(response: any, statusCode?: number, data?: any, headers: any = {}) {
+	function returnHandler(
+		response: any,
+		statusCode?: number,
+		data?: any,
+		headers: any = {}
+	) {
 		if (response.headersSent) {
 			return;
 		}
 		Object.keys(headers).forEach((name: string) => {
 			response.set(name, headers[name]);
 		});
-		if (data && typeof data.pipe === "function" && data.readable && typeof data._read === "function") {
+		if (
+			data &&
+			typeof data.pipe === "function" &&
+			data.readable &&
+			typeof data._read === "function"
+		) {
 			response.status(statusCode || 200);
 			data.pipe(response);
 		} else if (data !== null && data !== undefined) {
@@ -116,42 +132,108 @@ export function RegisterRoutes(app: Router) {
 				case "request":
 					return request;
 				case "query":
-					return validationService.ValidateParam(args[key], request.query[name], name, fieldErrors, undefined, {
-						noImplicitAdditionalProperties: "throw-on-extras",
-					});
+					return validationService.ValidateParam(
+						args[key],
+						request.query[name],
+						name,
+						fieldErrors,
+						undefined,
+						{
+							noImplicitAdditionalProperties: "throw-on-extras",
+						}
+					);
 				case "queries":
-					return validationService.ValidateParam(args[key], request.query, name, fieldErrors, undefined, {
-						noImplicitAdditionalProperties: "throw-on-extras",
-					});
+					return validationService.ValidateParam(
+						args[key],
+						request.query,
+						name,
+						fieldErrors,
+						undefined,
+						{
+							noImplicitAdditionalProperties: "throw-on-extras",
+						}
+					);
 				case "path":
-					return validationService.ValidateParam(args[key], request.params[name], name, fieldErrors, undefined, {
-						noImplicitAdditionalProperties: "throw-on-extras",
-					});
+					return validationService.ValidateParam(
+						args[key],
+						request.params[name],
+						name,
+						fieldErrors,
+						undefined,
+						{
+							noImplicitAdditionalProperties: "throw-on-extras",
+						}
+					);
 				case "header":
-					return validationService.ValidateParam(args[key], request.header(name), name, fieldErrors, undefined, {
-						noImplicitAdditionalProperties: "throw-on-extras",
-					});
+					return validationService.ValidateParam(
+						args[key],
+						request.header(name),
+						name,
+						fieldErrors,
+						undefined,
+						{
+							noImplicitAdditionalProperties: "throw-on-extras",
+						}
+					);
 				case "body":
-					return validationService.ValidateParam(args[key], request.body, name, fieldErrors, undefined, {
-						noImplicitAdditionalProperties: "throw-on-extras",
-					});
+					return validationService.ValidateParam(
+						args[key],
+						request.body,
+						name,
+						fieldErrors,
+						undefined,
+						{
+							noImplicitAdditionalProperties: "throw-on-extras",
+						}
+					);
 				case "body-prop":
-					return validationService.ValidateParam(args[key], request.body[name], name, fieldErrors, "body.", {
-						noImplicitAdditionalProperties: "throw-on-extras",
-					});
+					return validationService.ValidateParam(
+						args[key],
+						request.body[name],
+						name,
+						fieldErrors,
+						"body.",
+						{
+							noImplicitAdditionalProperties: "throw-on-extras",
+						}
+					);
 				case "formData":
 					if (args[key].dataType === "file") {
-						return validationService.ValidateParam(args[key], request.file, name, fieldErrors, undefined, {
-							noImplicitAdditionalProperties: "throw-on-extras",
-						});
-					} else if (args[key].dataType === "array" && args[key].array.dataType === "file") {
-						return validationService.ValidateParam(args[key], request.files, name, fieldErrors, undefined, {
-							noImplicitAdditionalProperties: "throw-on-extras",
-						});
+						return validationService.ValidateParam(
+							args[key],
+							request.file,
+							name,
+							fieldErrors,
+							undefined,
+							{
+								noImplicitAdditionalProperties: "throw-on-extras",
+							}
+						);
+					} else if (
+						args[key].dataType === "array" &&
+						args[key].array.dataType === "file"
+					) {
+						return validationService.ValidateParam(
+							args[key],
+							request.files,
+							name,
+							fieldErrors,
+							undefined,
+							{
+								noImplicitAdditionalProperties: "throw-on-extras",
+							}
+						);
 					} else {
-						return validationService.ValidateParam(args[key], request.body[name], name, fieldErrors, undefined, {
-							noImplicitAdditionalProperties: "throw-on-extras",
-						});
+						return validationService.ValidateParam(
+							args[key],
+							request.body[name],
+							name,
+							fieldErrors,
+							undefined,
+							{
+								noImplicitAdditionalProperties: "throw-on-extras",
+							}
+						);
 					}
 				case "res":
 					return responder(response);

@@ -3,7 +3,7 @@ import type { OrderRepository } from "@domain/repositories/OrderRepository";
 import { pool } from "../config/config";
 
 export class PostgreOrderRepository implements OrderRepository {
-	async findById(id: string): Promise<Order | null> {
+	async findById(id: string): Promise<Order> {
 		const client = await pool.connect();
 		try {
 			const result = await client.query("SELECT * FROM orders WHERE id = $1", [id]);
@@ -28,7 +28,9 @@ export class PostgreOrderRepository implements OrderRepository {
 	async findByCustomerId(customerId: string): Promise<Order[]> {
 		const client = await pool.connect();
 		try {
-			const result = await client.query("SELECT * FROM orders WHERE customer_id = $1", [customerId]);
+			const result = await client.query("SELECT * FROM orders WHERE customer_id = $1", [
+				customerId,
+			]);
 			return result.rows.map(
 				(row) =>
 					new Order(

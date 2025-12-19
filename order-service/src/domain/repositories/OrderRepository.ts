@@ -1,7 +1,7 @@
 import type { Order } from "../entities/Order";
 
 export interface OrderRepository {
-	findById(id: string): Promise<Order | null>;
+	findById(id: string): Promise<Order>;
 	findByCustomerId(customerId: string): Promise<Order[]>;
 	save(order: Order): Promise<void>;
 	update(order: Order): Promise<void>;
