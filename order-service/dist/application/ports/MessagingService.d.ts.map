@@ -1,0 +1,1 @@
+{"version":3,"file":"MessagingService.d.ts","sourceRoot":"","sources":["../../../src/application/ports/MessagingService.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,gBAAgB;IAChC,OAAO,CAAC,QAAQ,EAAE,MAAM,EAAE,UAAU,EAAE,MAAM,EAAE,OAAO,EAAE,GAAG,GAAG,OAAO,CAAC,IAAI,CAAC,CAAC;IAC3E,SAAS,CAAC,KAAK,EAAE,MAAM,EAAE,OAAO,EAAE,CAAC,OAAO,EAAE,GAAG,KAAK,IAAI,GAAG,IAAI,CAAC;CAChE"}

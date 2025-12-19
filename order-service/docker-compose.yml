@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: order-service-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - ./rabbitmq_data:/var/lib/rabbitmq
+
+  postgres:
+    image: postgres:15
+    container_name: order-service-postgres
+    environment:
+      POSTGRES_DB: order_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  dbmate:
+    image: "ghcr.io/amacneil/dbmate:latest"
+    container_name: order-service-dbmate
+    environment:
+      DATABASE_URL: postgres://user:password@postgres:5432/order_db?sslmode=disable
+    volumes:
+      - ./db/migrations:/db/migrations
+    command: "up"
+    depends_on:
+      - postgres
+
+volumes:
+  rabbitmq_data: {}
+  postgres_data: {}
